@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            E-Magazine
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+</head>
+<body>
+
+<header class="site-header">
+    <nav class="navbar">
+
+        <a href="#" class="logo">
+            <span>E</span>-Magazine
+        </a>
+
+        <ul class="nav-links">
+            <li>
+                <a href="#" class="active">Bosh sahifa</a>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-link">
+                    Category
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+
+                <ul class="dropdown-menu">
+                    {% for c in category %}
+                        <li>
+                            <a href="#">{{ c.name }}</a>
+                        </li>
+                    {% empty %}
+                        <li>
+                            <a href="#">Category yo‘q</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+            <a href="#" class="login-btn">
+                Kirish
+            </a>
+        </div>
+
+        <button class="menu-btn" id="menuBtn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#" class="active">Bosh sahifa</a>
+
+    <div class="mobile-category-title">
+        Category
+    </div>
+
+    {% for c in category %}
+        <a href="#">{{ c.name }}</a>
+    {% empty %}
+        <a href="#">Category yo‘q</a>
+    {% endfor %}
+
+    <a href="#" class="mobile-login">Kirish</a>
+</div>
+
+<main class="main-content">
+    {% block content %}
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="category">Bugungi son</span>
+
+            <h1>Zamonaviy e-magazine platformasiga xush kelibsiz</h1>
+
+            <p>
+                Eng so‘nggi yangiliklar, foydali maqolalar va qiziqarli kontentlar
+                bir joyda jamlangan.
+            </p>
+
+            <a href="#" class="hero-btn">
+                O‘qishni boshlash
+            </a>
+        </div>
+    </section>
+
+    {% endblock %}
+</main>
+
+<footer class="footer">
+    <p>© 2026 E-Magazine. Barcha huquqlar himoyalangan.</p>
+</footer>
+
+<script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("show");
+    });
+</script>
+
+</body>
+</html>

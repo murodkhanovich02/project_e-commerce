@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Bosh sahifa | E-Magazine
+{% endblock %}
+
+{% block content %}
+
+<section class="latest-section">
+
+    <div class="section-title">
+        <h2>Oxirgi qo‘shilgan mahsulotlar</h2>
+    </div>
+
+    {% if latest_product %}
+
+        <div class="featured-product">
+
+            <div class="featured-image-box">
+                {% if latest_product.image %}
+                    <img src="{{ latest_product.image.url }}" alt="{{ latest_product.title }}">
+                {% else %}
+                    <div class="image-placeholder">
+                        Rasm mavjud emas
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="featured-content">
+                <span class="product-category">
+                    {% if latest_product.category %}
+                        {{ latest_product.category.name }}
+                    {% else %}
+                        Category yo‘q
+                    {% endif %}
+                </span>
+
+                <h2>{{ latest_product.title }}</h2>
+
+                <p>
+                    {{ latest_product.description|truncatewords:35 }}
+                </p>
+
+                <a href="#" class="read-more-btn">
+                    Batafsil
+                </a>
+            </div>
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-message">
+            <p>Hozircha mahsulot qo‘shilmagan.</p>
+        </div>
+
+    {% endif %}
+
+
+    {% if other_products %}
+
+        <div class="other-products">
+
+            {% for product in other_products %}
+
+                <div class="small-product-card">
+
+                    <div class="small-product-image">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.title }}">
+                        {% else %}
+                            <div class="small-image-placeholder">
+                                Rasm yo‘q
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="small-product-content">
+
+                        <a href="#" class="small-read-more">
+                            Batafsil
+                        </a>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
